@@ -65,6 +65,12 @@ class TestBrainfuckParser:
                                                       MovePointer[-2]],
                            MovePointer[-2]]''')
 
+    def test_loop_error(self):
+        raises(ValueError, '''parse(StringIO('++[--'))''')
+        raises(ValueError, '''parse(StringIO('++[--[>>]<<'))''')
+        raises(ValueError, '''parse(StringIO('++[--[>>[<<'))''')
+        raises(ValueError, '''parse(StringIO('++[--]>>]<<'))''')
+
     def test_unknown(self):
         assert eq(parse(StringIO('this is\nunknown.')), 'Program[Output[{0}]]')
         assert eq(parse(StringIO('++ ++')), 'Program[{0}+=2, {0}+=2]')

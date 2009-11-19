@@ -8,5 +8,5 @@ class BaseParser(object):
         return getattr(self.compiler, name)
 
     def parse(self, fp):
-        raise RuntimeError('not implemented')
+        raise NotImplementedError
 
